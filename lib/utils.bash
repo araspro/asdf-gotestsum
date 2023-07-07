@@ -47,7 +47,6 @@ install_version() {
 	fi
 
 	(
-		mkdir -p "$install_path"
 		GOBIN="${install_path}" go install "${GO_MODULE}@${version}"
 
 		# TODO: Assert gotestsum executable exists.
