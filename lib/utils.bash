@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for gotestsum.
-GH_REPO="https://github.com/gotestyourself/gotestsum"
 GO_MODULE="gotest.tools/gotestsum"
 TOOL_NAME="gotestsum"
 TOOL_TEST="gotestsum --help"
