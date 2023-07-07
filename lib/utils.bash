@@ -4,6 +4,7 @@ set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for gotestsum.
 GH_REPO="https://github.com/gotestyourself/gotestsum"
+GO_MODULE="gotest.tools/gotestsum"
 TOOL_NAME="gotestsum"
 TOOL_TEST="gotestsum --help"
 
@@ -36,18 +37,6 @@ list_all_versions() {
 	list_github_tags
 }
 
-download_release() {
-	local version filename url
-	version="$1"
-	filename="$2"
-
-	# TODO: Adapt the release URL convention for gotestsum
-	url="$GH_REPO/archive/v${version}.tar.gz"
-
-	echo "* Downloading $TOOL_NAME release $version..."
-	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
-}
-
 install_version() {
 	local install_type="$1"
 	local version="$2"
@@ -59,7 +48,7 @@ install_version() {
 
 	(
 		mkdir -p "$install_path"
-		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+		GOBIN="${install_path}" go install "${GO_MODULE}@${version}"
 
 		# TODO: Assert gotestsum executable exists.
 		local tool_cmd
