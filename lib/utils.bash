@@ -41,7 +41,7 @@ install_version() {
 	fi
 
 	(
-		GOBIN="${install_path}" go install "${GO_MODULE}@${version}"
+		GOBIN="${install_path}" go install "${GO_MODULE}@v${version}"
 
 		# TODO: Assert gotestsum executable exists.
 		local tool_cmd
